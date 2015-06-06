@@ -3,12 +3,11 @@
 module Main where
 import Snap.Http.Server
 import Snap.Util.FileServe
-import qualified Snap.Core as Core
+import Snap.Core 
 
-fileHandle = Core.route [("",serveFile "www/index.html"),
-                        ("",serveDirectory "www")]
+fileHandle = route [("",serveFile "www/index.html"),
+                    ("",serveDirectory "www")]
 
 handle = fileHandle
 
-main = do
-  quickHttpServe handle
+main = quickHttpServe handle
