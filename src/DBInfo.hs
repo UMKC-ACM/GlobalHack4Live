@@ -11,7 +11,6 @@ module DBInfo where
 import           Control.Monad.IO.Class  (liftIO)
 import           Database.Persist
 import           Database.Persist.Postgresql
-import           Database.Persist.Postgres
 import           Database.Persist.TH
 import Types
 import qualified Data.Text as T
