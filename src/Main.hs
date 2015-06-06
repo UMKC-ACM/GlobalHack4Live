@@ -13,7 +13,15 @@ import qualified Network.HTTP.Base as HTTP
 import Network.HTTP.Headers
 import Network.URI
 
-create = HTTP.simpleHTTP (request) >> return ()
+app_id = "7740739530260546"
+app_secret = "ycJgreLAX4Q0jTr6A1gcszO/7rWUxPU+UysAlwec+V6+VX5gZZLwHdrmF3vE0fWmLrBrCJJ9Wt7zdPj8Zh+Lyg=="
+
+createURL:: String
+createURL = "http://api.globalhack4.test.lockerdome.com/app_create_content?{\"app_id\":"++app_id++",\"app_secret\":\""++app_secret++"\",\"app_data\":{\"fun\":\"times\"},\"name\":\"rootastic\",\"text\":\"Short description of your content\"}\""
+
+create = HTTP.simpleHTTP (HTTP.getRequest createURL) >> return ()
+
+create' = HTTP.simpleHTTP (request) >> return ()
          where bod = "{\"app_id\":7740739530260546, \"app_secret\":\"ycJgreLAX4Q0jTr6A1gcszO/7rWUxPU+UysAlwec+V6+VX5gZZLwHdrmF3vE0fWmLrBrCJJ9Wt7zdPj8Zh+Lyg==\", \"app_data\":{ \"fun\":\"times\"}, \"name\":\"Some App Content\", \"text\":\"Short description of your content\"}"
                url = "http://api.globalhack4.test.lockerdome.com/app_create_content?"
                request:: HTTP.Request String
