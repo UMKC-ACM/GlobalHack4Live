@@ -12,7 +12,7 @@ import Data.Aeson
 import Types
 import Control.Monad.IO.Class
 import Control.Applicative
-import qualified Rest.Gen as Gen
+--import qualified Rest.Gen as Gen
 
 contentIDResource = mkResourceReader {
  R.name = "content_id",
