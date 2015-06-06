@@ -31,6 +31,8 @@ DBPair
   deriving Show
 |]
 
+test = undefined
+
 contentToDB (ContentID id picture pairs) = DBContentID id picture (map pairToDB pairs)
 
 pairToDB (Pair x y info) = DBPair x y info
