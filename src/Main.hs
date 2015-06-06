@@ -12,6 +12,7 @@ import Data.Aeson
 import Types
 import Control.Monad.IO.Class
 import Control.Applicative
+import qualified Snap.Core as Core
 --import qualified Rest.Gen as Gen
 
 contentIDResource = mkResourceReader {
@@ -35,9 +36,10 @@ api = [(mkVersion 1 0 0, Some1 apiRoutes)]
 
 apiHandle = apiToHandler' liftIO api
 
-
+fileHandler = Core.route [("",serveFile "www/index.html"),
+			  ("",serveDirectory "www")]
 
 main = do
 --	config <- Gen.configFromArgs "gh4"
 --	Gen.generate config "gh4" api [] [] []
- 	quickHttpServe (apiHandle )
+ 	quickHttpServe (apiHandle <|> fileHandler)
