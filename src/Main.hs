@@ -10,4 +10,5 @@ fileHandle = Core.route [("",serveFile "www/index.html"),
 
 handle = fileHandle
 
-main = quickHttpServe handle
+main = do
+  quickHttpServe handle
