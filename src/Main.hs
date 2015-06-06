@@ -12,10 +12,11 @@ import Data.Aeson
 import Types
 import Control.Monad.IO.Class
 import Control.Applicative
+import qualified Rest.Gen as Gen
 
 contentIDResource = mkResourceReader {
- R.name = "",
- R.schema = noListing $ named [("", singleBy id)],
+ R.name = "content_id",
+ R.schema = withListing () $ named [("id", singleBy id)],
  R.get = Just get,
  R.create = Just create
 }
@@ -36,4 +37,7 @@ apiHandle = apiToHandler' liftIO api
 
 
 
-main = quickHttpServe (apiHandle )
+main = do
+--	config <- Gen.configFromArgs "gh4"
+--	Gen.generate config "gh4" api [] [] []
+ 	quickHttpServe (apiHandle )
