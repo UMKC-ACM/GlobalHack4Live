@@ -21,6 +21,7 @@ executable test-backend
   build-depends:       base,
                        rest-core,
                        rest-snap,
+                       --rest-stringmap==0.2.0.4,
                        aeson,
                        json-schema,
                        snap-server,
@@ -28,6 +29,7 @@ executable test-backend
                        transformers,
                        mtl,
                        generic-xmlpickler,
+                     
                        hxt
 
   hs-source-dirs:      src
