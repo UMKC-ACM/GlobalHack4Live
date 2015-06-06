@@ -54,3 +54,4 @@ lookupContent id = do
 
 createContent:: ContentID -> IO (Key DBContentID)
 createContent content =   runStdoutLoggingT $ withPostgresqlPool conf 1 $ \pool -> liftIO $ flip runSqlPersistMPool pool ((insert (contentToDB content)))
+
