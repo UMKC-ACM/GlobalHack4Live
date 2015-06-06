@@ -16,7 +16,7 @@ import Control.Applicative
 
 contentIDResource = mkResourceReader {
  R.name = "content_id",
- R.schema = withListing () $ named [("id", singleBy id)],
+ R.schema = noListing $ named [("id", singleBy id)],
  R.get = Just get,
  R.create = Just create
 }
