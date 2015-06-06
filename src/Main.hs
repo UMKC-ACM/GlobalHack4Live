@@ -42,4 +42,4 @@ fileHandler = Core.route [("",serveFile "www/index.html"),
 main = do
 --	config <- Gen.configFromArgs "gh4"
 --	Gen.generate config "gh4" api [] [] []
- 	quickHttpServe (apiHandle <|> fileHandler)
+ 	quickHttpServe (fileHandler <|> apiHandle)
