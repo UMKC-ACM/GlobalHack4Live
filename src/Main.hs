@@ -24,9 +24,9 @@ contentIDResource = mkResourceReader {
  R.create = Just create
 }
 
-
 testContentId = ContentID{ _id = "test",_picture = "",_pairs = [Pair {_x =10,_y=10,_info="test"}, Pair{_x=20,_y=20,_info="testy"}]}
 
+badContentID::ContentID
 badContentID = ContentID { _id = "ERROR NOT FOUND"}
 
 get = mkIdHandler (jsonO) $ handle 
