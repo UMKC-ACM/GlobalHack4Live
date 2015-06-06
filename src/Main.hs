@@ -36,10 +36,9 @@ api = [(mkVersion 1 0 0, Some1 apiRoutes)]
 
 apiHandle = apiToHandler' liftIO api
 
-fileHandler = Core.route [("",serveFile "www/index.html"),
-			  ("",serveDirectory "www")]
+fileHandler = serveDirectory "www"
 
 main = do
 --	config <- Gen.configFromArgs "gh4"
 --	Gen.generate config "gh4" api [] [] []
- 	quickHttpServe (apiHandle <|> fileHandler)
+ 	quickHttpServe (fileHandler <|> apiHandle)
