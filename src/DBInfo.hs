@@ -42,8 +42,7 @@ dBToContent (DBContentID id picture pairs) = ContentID id picture (map dBToPair 
 dBToPair (DBPair x y info) = Pair x y info
 
 mkMigration = runStdoutLoggingT $ withPostgresqlPool conf 1 $ \pool ->
-     liftIO $ flip runSqlPersistMPool pool $ do
-        printMigration migrateAll
+     liftIO $ flip runSqlPersistMPool pool $  runMigration migrateAll
 
 runInDb  f = runStdoutLoggingT $ withPostgresqlPool conf 1 $ \pool -> liftIO $ flip runSqlPersistMPool pool f
 
@@ -55,5 +54,5 @@ lookupContent id = do
           getContent =  runInDb (selectFirst [DBContentIDDbid ==. id][LimitTo 1])
 
 createContent:: ContentID -> IO (Key DBContentID)
-createContent content =   runStdoutLoggingT $ withPostgresqlPool conf 1 $ \pool -> liftIO $ flip runSqlPersistMPool pool ((insert (contentToDB content)))
+createContent content =   runStdoutLoggingT $ withPostgresqlPool conf 10 $ \pool -> liftIO $ flip runSqlPersistMPool pool ((insert (contentToDB content)))
 
