@@ -10,6 +10,7 @@ import Control.Monad.IO.Class
 import Data.Maybe
 import qualified Network.HTTP as HTTP
 import qualified Network.HTTP.Base as HTTP
+import Network.HTTP.Headers
 import Network.URI
 
 create = HTTP.simpleHTTP (request) >> return ()
@@ -18,7 +19,7 @@ create = HTTP.simpleHTTP (request) >> return ()
                request:: HTTP.Request String
                request = HTTP.Request { HTTP.rqURI = (fromJust $ parseURI url),
                                   HTTP.rqMethod = HTTP.GET,
-                                  HTTP.rqHeaders = [],
+                                  HTTP.rqHeaders = [mkHeader HdrContentType "application/javascript"],
                                   HTTP.rqBody = bod}
 apiHandle:: Snap ()
 apiHandle = route [("1.0.0",serveFile "www/index.html"),

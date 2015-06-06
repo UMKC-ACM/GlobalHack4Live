@@ -1,0 +1,8 @@
+<<<<<<< HEAD
+dist
+.cabal-sandbox
+cabal.sandbox.config
+=======
+dist\n.cabal-sandbox\ncabal.sandbox.config
+/nbproject/private/
+>>>>>>> 34c959cb308d3652a7ca5dfa8731bcbbaba61de2
