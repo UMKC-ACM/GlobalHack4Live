@@ -15,7 +15,7 @@ data ContentID = ContentID {
   _id :: T.Text,
   _picture :: T.Text,
   _pairs :: [Pair]
-} deriving (Data,Typeable)
+} deriving (Data,Typeable, Show, Eq, Read)
 
 instance FromJSON ContentID where
  parseJSON (Object v) = ContentID <$>
@@ -30,10 +30,10 @@ instance Schema.JSONSchema ContentID where
   schema _ = Schema.Any
 
 data Pair = Pair{
-  _x :: Integer,
-  _y :: Integer,
+  _x :: Int,
+  _y :: Int,
   _info :: T.Text
-} deriving (Data,Typeable)
+} deriving (Data,Typeable, Show, Eq, Read)
 
 instance FromJSON Pair where
   parseJSON (Object v) = Pair <$>
