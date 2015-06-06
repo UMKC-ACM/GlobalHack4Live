@@ -7,6 +7,7 @@
 {-# LANGUAGE QuasiQuotes                #-}
 {-# LANGUAGE TemplateHaskell            #-}
 {-# LANGUAGE TypeFamilies               #-}
+{-# LANGUAGE NoMonomorphismRestriction  #-}
 module DBInfo where
 import           Control.Monad.IO.Class  (liftIO)
 import           Database.Persist
@@ -15,7 +16,7 @@ import           Database.Persist.TH
 import Types
 import qualified Data.Text as T
 import Data.Functor
-
+import Control.Monad.Logger
 conf = "host=ec2-54-83-57-86.compute-1.amazonaws.comport=5432 user=bmfwimcvljiyil dbname=d2fhi8h00c05m7 password=f4oDRsvVF5d4VFgm2vvEZ-fzd0"
 share [mkPersist sqlSettings, mkMigrate "migrateAll"][persistLowerCase|
 DBContentID 
@@ -38,15 +39,18 @@ dBToContent (DBContentID id picture pairs) = ContentID id picture (map dBToPair 
 
 dBToPair (DBPair x y info) = Pair x y info
 
-mkMigration:: IO ()
-mkMigration = runInDB (runMigration migrateAll)
+mkMigration = runStdoutLoggingT $ withPostgresqlPool conf 1 $ \pool ->
+     liftIO $ flip runSqlPersistMPool pool $ do
+        printMigration migrateAll
 
-runInDB f = withPostgresqlConn conf f
+runInDb  f = runStdoutLoggingT $ withPostgresqlPool conf 1 $ \pool -> liftIO $ flip runSqlPersistMPool pool f
 
 lookupContent:: T.Text -> IO (Maybe ContentID)
 lookupContent id = do
-  content <- runInDB $ (selectFirst [DBContentIDDbid ==. id][LimitTo 1])
+  content <-getContent 
   return (dBToContent <$> (entityVal <$> content))
+    where getContent:: IO (Maybe (Entity DBContentID))
+          getContent =  runInDb (selectFirst [DBContentIDDbid ==. id][LimitTo 1])
 
 createContent:: ContentID -> IO (Key DBContentID)
-createContent content =  runInDB  (insert (contentToDB content))
+createContent content =   runStdoutLoggingT $ withPostgresqlPool conf 1 $ \pool -> liftIO $ flip runSqlPersistMPool pool ((insert (contentToDB content)))
