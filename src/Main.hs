@@ -33,15 +33,15 @@ testContentId = ContentID{_title="yest",
 
 testAnnotation = Annotation {_src = "http://127.0.0.1:8080/image/640px-Hallstatt.jpg",
                              _text = "test",
-                             _shapes = [testShape]
+   _context = "http://127.0.0.1:8080/",
+   _editable = False,
+                          _shapes = [testShape]
 }
 
 testShape = Shapes {
   _type = "rect",
-  _geometry = testGeometry,
-  _context = "http://127.0.0.1:8080/",
-  _editable = False
-}
+  _geometry = testGeometry
+  }
 
 testGeometry = Geometry{
   _x = 1,

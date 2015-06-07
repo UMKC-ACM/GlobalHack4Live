@@ -29,12 +29,12 @@ DBAnnotation
   dbsrc T.Text
   dbtext T.Text
   dbshapes [DBShapes]
+  dbcontext T.Text
+  dbeditable Bool
   deriving Show
 DBShapes
   dbtype T.Text
   dbgeometry DBGeometry
-  dbcontext T.Text
-  dbeditable Bool
   deriving Show
 DBGeometry
   dbx Double
@@ -48,17 +48,17 @@ DBGeometry
 
 contentToDB (ContentID link title annotation id) = DBContentID link title (map annotationToDB annotation) id
 
-annotationToDB (Annotation src text shapes) = DBAnnotation src text (map shapeToDB shapes)
+annotationToDB (Annotation src text shapes context editable) = DBAnnotation src text (map shapeToDB shapes) context editable
 
-shapeToDB (Shapes typ geom context editable) = DBShapes typ (geometryToDB geom) context editable
+shapeToDB (Shapes typ geom) = DBShapes typ (geometryToDB geom)
 
 geometryToDB (Geometry x y w h) = DBGeometry x y w h
 
 dBToContent (DBContentID title link annotation id) = ContentID title link (map dBToAnnotation annotation) id
 
-dBToAnnotation (DBAnnotation src text shapes) = Annotation src text (map dBToShape shapes)
+dBToAnnotation (DBAnnotation src text shapes context editable) = Annotation src text (map dBToShape shapes) context editable
 
-dBToShape (DBShapes typ geom context editable) = Shapes typ (dBToGeometry geom) context editable
+dBToShape (DBShapes typ geom) = Shapes typ (dBToGeometry geom)
 
 dBToGeometry (DBGeometry x y w h ) = Geometry x y w h
 

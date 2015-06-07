@@ -21,16 +21,15 @@ data ContentID = ContentID {
 data Annotation = Annotation{
   _src :: T.Text,
   _text :: T.Text,
-  _shapes :: [Shapes]
+  _shapes :: [Shapes],
+  _context :: T.Text,
+  _editable :: Bool
 } deriving (Data,Typeable, Show, Eq, Read)
 
 
 data Shapes = Shapes {
   _type  :: T.Text,
-  _geometry :: Geometry,
-  _context :: T.Text,
-  _editable :: Bool
-
+  _geometry :: Geometry
 } deriving (Data,Typeable, Show, Eq, Read)
 
 data Geometry = Geometry {
@@ -59,9 +58,12 @@ instance FromJSON Annotation where
   parseJSON (Object v) = Annotation <$>
                          v .: "src" <*>
                          v .: "text" <*>
-                         v .: "shapes"
+                         v .: "shapes" <*>
+                         v .: "context" <*>
+                         v .: "editable"
 instance ToJSON Annotation where
-  toJSON (Annotation src text shapes) = object ["src" .= src, "text" .= text, "shapes" .= shapes]
+  toJSON (Annotation src text shapes context editable) = object ["src" .= src, "text" .= text, "shapes" .= shapes, "context" .= context, "editable" .= editable]
+   
 
 instance Schema.JSONSchema Annotation where
   schema _ = Schema.Any
@@ -69,11 +71,9 @@ instance Schema.JSONSchema Annotation where
 instance FromJSON Shapes where
   parseJSON (Object v) = Shapes <$>
                          v .: "type" <*>
-                         v .: "geometry" <*>
-                         v .: "context" <*>
-                         v .: "editable" 
+                         v .: "geometry" 
 instance ToJSON Shapes where
-  toJSON (Shapes typ geom context editable) = object ["type" .= typ, "geometry" .= geom, "context" .= context, "editable" .= editable]
+  toJSON (Shapes typ geom ) = object ["type" .= typ, "geometry" .= geom]
 instance Schema.JSONSchema Shapes where
   schema _ = Schema.Any
 
