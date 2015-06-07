@@ -11,12 +11,13 @@
       <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script src="js/responsive-placeholder-images.js"></script>
       <script src="js/annotorious.min.js"></script>
+      <script src="js/ulti.js"></script>
     </head>
-    <body>
+    <body onload="initialize()">
 
       <nav>
         <div class="nav-wrapper blue lighten-2">
-          <a href="#" class="brand-logo center">Add Image with Annotations</a>
+          <a href="#" class="brand-logo center">ImgNotate</a>
         </div>
       </nav>
 
@@ -28,12 +29,14 @@
                   <div class="defer-image image-ratio:2x1" style="width:100%;">
                     <div class="row">
                           <p class="center-align" style="font-size:1.5em;" id="replace" >click to upload image</p>
-                      </a>
                       </div>
                     </div>
                   </div>
             </div>
           </div>
+
+      <div id="tweets-list">
+      </div>
 
       <div class="row">
         <div class="input-field col s12">
@@ -89,6 +92,7 @@
       jQuery(document).ready(function($){
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
       $('.modal-trigger').leanModal();
+
       $("#upload").html('<img id="annot" class="annotatable" src="image/640px-Hallstatt.jpg" style="width:100%"/>');
 
       $("#replace").click(function(){
