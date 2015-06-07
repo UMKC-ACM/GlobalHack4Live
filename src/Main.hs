@@ -24,9 +24,31 @@ contentIDResource = mkResourceReader {
  R.get = Just get,
  R.create = Just create
 }
-{--
-testContentId = ContentID{ _id  "test",_picture = "",_pairs = [Pair {_x =10,_y=10,_info="test"}, Pair{_x=20,_y=20,_info="testy"}]}
---}
+
+testContentId = ContentID{_title="yest",
+                          _link="eh",
+                          _annotation = [testAnnotation],
+                          _id = "test"
+}
+
+testAnnotation = Annotation {_src = "http://127.0.0.1:8080/image/640px-Hallstatt.jpg",
+                             _text = "test",
+                             _shapes = [testShape]
+}
+
+testShape = Shapes {
+  _type = "rect",
+  _geometry = testGeometry,
+  _context = "http://127.0.0.1:8080/",
+  _editable = False
+}
+
+testGeometry = Geometry{
+  _x = 1,
+  _y = 1,
+  _width = 1,
+  _height = 1
+}
 
 badContentID::ContentID
 badContentID = ContentID { _title = errString, _link =errString, _annotation=[], _id = errString}
