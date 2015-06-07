@@ -35,7 +35,7 @@
       <div class="row" style="margin: 20px;">
         <div class="col s10 offset-s1 ">
               <div  id="upload">
-                <img id="annot" class="annotatable" src="" style="width:100%"/>
+                <img draggable ="false" id="annot" class="annotatable" src="" style="width:100%"/>
             </div>
           </div>
       </div>
@@ -134,10 +134,10 @@
                 myAnnotation[i].editable = false;
               }
 
-
             jQuery.ajaxSetup({ jsonp: null, jsonpCallback: null});
 
             function postData(obj) {
+
                 $.ajax({
                   url: "http://stormy-plains-1882.herokuapp.com/1.0.0/content_id/",
                   method: "POST",
@@ -149,7 +149,7 @@
                       })//end of .done
                       .fail(function() {
                           console.log( "error" );
-                        });//end of .fail */
+                        });//end of .fail
 
         /*$.post( "104.236.78.214/1.0.0/content_id/",function(){alert("succes")},"json")
                       .done(function(result) {
