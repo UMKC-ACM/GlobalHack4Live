@@ -13,7 +13,8 @@ import Types
 import Control.Monad.IO.Class
 import Control.Applicative
 import qualified Snap.Core as Core
---import qualified Rest.Gen as Gen
+import qualified Rest.Gen as Gen
+import qualified Rest.Gen.Config as Gen
 import DBInfo
 import Control.Monad.Error.Class
 
@@ -36,21 +37,20 @@ get = mkIdHandler (jsonO) $ handle
               Nothing -> return badContentID
               Just a -> return a
 
-
-readPostFromDb id = return testContentId 
-
 create = mkInputHandler (jsonI . jsonO) $ handle 
-          where handle c =  (liftIO $ createContent c) >> return (_id c)
+          where 	handle c@(ContentID id picture pairs) =  (liftIO $ createContent c) >> return (id)
               
 apiRoutes = root -/ (route contentIDResource)
+
 api = [(mkVersion 1 0 0, Some1 apiRoutes)]
 
 apiHandle = apiToHandler' liftIO api
 
+fileHandler::Core.Snap ()
 fileHandler = serveDirectory "www"
 
 
 main = do
---	config <- Gen.configFromArgs "gh4"
---	Gen.generate config "gh4" api [] [] []
- 	quickHttpServe (fileHandler <|> apiHandle)
+	config <- Gen.configFromArgs "rest-example-gen"
+	Gen.generate config "gh4" api [] [] []
+ --	quickHttpServe (fileHandler <|> apiHandle)
