@@ -18,5 +18,14 @@ angular.module('roos.services', [])
             }
          });
     };
+    var siteurl2 = "http://rootastic.us.to/1.0.0/content_id/id/test";
+            
+    fac.get2 = function() {
+        var request = siteurl2 + "?";
+        return $http({
+            url: request, 
+            method: "GET"
+         });
+    };
     return fac;
 });

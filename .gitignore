@@ -1,2 +1,5 @@
-dist\n.cabal-sandbox\ncabal.sandbox.config
+dist
+.cabal-sandbox
+cabal.sandbox.config
 /nbproject/private/
+*~
