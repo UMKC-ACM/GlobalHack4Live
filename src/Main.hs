@@ -17,6 +17,7 @@ import qualified Snap.Core as Core
 --import qualified Rest.Gen.Config as Gen
 import DBInfo
 import Control.Monad.Error.Class
+import Snap.CORS
 
 contentIDResource = mkResourceReader {
  R.name = "content_id",
@@ -54,8 +55,8 @@ badContentID::ContentID
 badContentID = ContentID { _title = errString, _link =errString, _annotation=[], _id = errString}
         where errString = "ERROR: NOT FOUND"
 
-get = mkIdHandler (jsonO) $ handle 
-     where handle _ id = do
+get = mkIdHandler (jsonO) $ handle' 
+     where handle' _ id = do
              content <- liftIO $ lookupContent (T.pack id)
              case content of
               Nothing -> return badContentID
@@ -77,4 +78,4 @@ fileHandler = serveDirectory "www"
 main = do
 --	config <- Gen.configFromArgs "rest-example-gen"
 --	Gen.generate config "gh4" api [] [] []
- 	quickHttpServe (fileHandler <|> apiHandle)
+ 	quickHttpServe (applyCORS defaultOptions (fileHandler <|> apiHandle))
