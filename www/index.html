@@ -4,10 +4,13 @@
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
       <link rel="stylesheet" href="css/responsive-placeholder-images.css" />
+      <link type="text/css" rel="stylesheet" href="css/annotorious.css" />
+
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
       <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script src="js/responsive-placeholder-images.js"></script>
+      <script type="text/javascript" src="js/annotorious.min.js"></script>
 
     </head>
     <body>
@@ -22,20 +25,18 @@
 
       <div class="row" style="margin: 20px;">
         <div class="col s10 offset-s1 ">
-            <a class="modal-trigger" href="#modal1">
-
-              <div  id="upload" >
+              <div  id="upload">
                   <div class="defer-image image-ratio:2x1" style="width:100%;">
                     <div class="row">
                       <div class="col s12">
-                        <p class="center-align" style="font-size:1.5em;">click to upload image</p>
+                        <a>
+                          <p class="center-align" style="font-size:1.5em;" id="replace" >click to upload image</p>
+                      </a>
                       </div>
                     </div>
                   </div>
             </div>
-
-          </a>
-        </div>
+          </div>
       </div>
 
       <div class="row">
@@ -44,17 +45,6 @@
           <label for="text">Title</label>
         </div>
       </div>
-
-      <div id="modal1" class="modal">
-          <div class="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
-          </div>
-          <div class="modal-footer">
-            <a href="#!" id="replace" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-          </div>
-        </div>
-
 
       <div class="row">
          <form class="col s12">
@@ -77,20 +67,47 @@
 
   </div>
 
+  <!-- MODAL -->
+<!--  <div class="container">
+  <div class="row">
+    <div class="col s8">
+  <div id="modal1" class="modal"  style="width:70%">
+          <div class="modal-content">
+            <h4>Modal Header</h4>
+            <div class="row">
+              <div class="col s8 offset-s2">
+            <img class="annotatable" id="annot" draggable="false" src="image/iphone6s.jpeg" style="width:100%"/>
+          </div>
+        </div>
+        </div>
+          <div class="modal-footer">
+            <a href="#!" id="replace" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+          </div>
+        </div>
+        </div>
+    </div>
+</div>-->
+
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="js/materialize.min.js"></script>
 
       <script type="text/javascript">
+      jQuery.noConflict();
 
-      $(document).ready(function(){
+      jQuery(document).ready(function($){
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
       $('.modal-trigger').leanModal();
+      $("#upload").html('<img id="annot" class="annotatable" src="image/iphone6s.jpeg" style="width:100%"/>');
 
       $("#replace").click(function(){
-        $("#upload").html('<img src="image/iphone6s.jpeg"></img>');
+
+
+        });
     });
 
-      });
+
+
+
 
       </script>
 
