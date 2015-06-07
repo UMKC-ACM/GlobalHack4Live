@@ -2,16 +2,15 @@
   <html>
     <head>
       <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-      <link rel="stylesheet" href="css/responsive-placeholder-images.css" />
-      <link type="text/css" rel="stylesheet" href="css/annotorious.css" />
 
+      <link rel="stylesheet" href="css/responsive-placeholder-images.css" />
+      <link rel="stylesheet" href="css/theme-dark/annotorious-dark.css" />
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
       <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script src="js/responsive-placeholder-images.js"></script>
-      <script type="text/javascript" src="js/annotorious.min.js"></script>
-
+      <script src="js/annotorious.min.js"></script>
     </head>
     <body>
 
@@ -97,7 +96,7 @@
       jQuery(document).ready(function($){
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
       $('.modal-trigger').leanModal();
-      $("#upload").html('<img id="annot" class="annotatable" src="image/iphone6s.jpeg" style="width:100%"/>');
+      $("#upload").html('<img id="annot" class="annotatable" src="image/640px-Hallstatt.jpg" style="width:100%"/>');
 
       $("#replace").click(function(){
 
