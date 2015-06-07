@@ -13,8 +13,8 @@ import Types
 import Control.Monad.IO.Class
 import Control.Applicative
 import qualified Snap.Core as Core
-import qualified Rest.Gen as Gen
-import qualified Rest.Gen.Config as Gen
+--import qualified Rest.Gen as Gen
+--import qualified Rest.Gen.Config as Gen
 import DBInfo
 import Control.Monad.Error.Class
 
@@ -51,6 +51,6 @@ fileHandler = serveDirectory "www"
 
 
 main = do
-	config <- Gen.configFromArgs "rest-example-gen"
-	Gen.generate config "gh4" api [] [] []
- --	quickHttpServe (fileHandler <|> apiHandle)
+--	config <- Gen.configFromArgs "rest-example-gen"
+--	Gen.generate config "gh4" api [] [] []
+ 	quickHttpServe (fileHandler <|> apiHandle)
