@@ -92,7 +92,6 @@ function $class(classes){
 }
 
 function initialize(){
-  $id('TwitterContainer').style.display = none;
   getTweets("warcraft",5,"popular");
 }
 

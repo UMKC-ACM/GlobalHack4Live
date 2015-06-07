@@ -28,12 +28,33 @@
                       }],
               "context":"http://127.0.0.1:8080/",
               "editable": false
-            }];
+            },
+            {
+            "src":"http://127.0.0.1:8080/image/640px-Hallstatt.jpg",
+            "text":"hey",
+            "shapes":[{
+                  "type":"rect",
+                  "geometry":{
+                        "x":0.54935543278084716,
+                        "y":0.1352941176470588,
+                        "width":0.055248618784530384,
+                        "height":0.08235294117647059
+                          }
+                    }],
+            "context":"http://127.0.0.1:8080/",
+            "editable": false
+          }];
+
+            function loadAnnotations(obj){
+              for(i = 0; i < obj.length ; i++){
+                anno.addAnnotation(obj[i]);
+              }
+            }
 
       </script>
 
     </head>
-    <body onload="anno.addAnnotation(annot[0])">
+    <body onload="loadAnnotations(annot)">
 
       <nav>
         <div class="nav-wrapper blue lighten-2">

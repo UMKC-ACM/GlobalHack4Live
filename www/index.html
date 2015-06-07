@@ -142,25 +142,35 @@
                 myAnnotation[i].editable = false;
               }
 
+              function xyz(){
+                ;
+              }
             function postData(obj) {
-                 $.post( "http://rotastic.us.to/1.0.0/content_id/"+obj.id , obj)
-                      .done(function(result) {
-                            console.log("success send")
-                          })//end of .done
-                          .fail(function() {
-                              console.log( "error" );
-                            })//end of .fail
+              $.ajax({
+                  url: "http://rootastic.us.to/1.0.0/content_id/",
+                  method: 'POST',
+                  data: obj,
+                  //headers: {'Accept': "text/json" ,'Content-Type': "text/json"}
+                })  .done(function(result) {
+                    console.log(JSON.stringify(obj))
+                        console.log("success send")
+                      })//end of .done
+                      .fail(function() {
+                          console.log( "error" );
+                        });//end of .fail
                 }//end of PostData
 
-            $.get( "http://104.236.78.214:8080/")
+           $.get( "http://104.236.78.214:8080/")
                   .done(function(result) {
                       content_id  = JSON.parse(result)
-                      obj.id = content_id.id
+                      obj.id = content_id.id.toString();
                       console.log(JSON.stringify(obj));
                       postData(obj)
                       console.log("success fetch")
 
-                    });//end of .done
+                    });
+
+
 
           })//end of submit
 
