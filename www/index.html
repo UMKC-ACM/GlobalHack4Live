@@ -14,7 +14,8 @@
       <script src="js/ulti.js"></script>
     </head>
     <body onload="initialize()">
-
+      <div id="tweetHolder" style="display: none;">
+      </div>
       <nav>
         <div class="nav-wrapper blue lighten-2">
           <a href="#" class="brand-logo center">Add Image with Annotations</a>
@@ -22,7 +23,14 @@
       </nav>
 
       <div class="container">
-
+      <form id   =  "uploadForm"
+       enctype   =  "multipart/form-data"
+       action    =  "http://104.236.78.214:5001/api/photo"
+       method    =  "post"
+      >
+        <input type="file" name="userPhoto" />
+        <input type="submit" value="Upload Image" name="submit">
+      </form>
       <div class="row" style="margin: 20px;">
         <div class="col s10 offset-s1 ">
               <div  id="upload">
@@ -38,6 +46,8 @@
             </div>
           </div>
       </div>
+
+
       <div id="tweets-list">
 
 
