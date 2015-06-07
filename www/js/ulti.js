@@ -24,10 +24,10 @@ function switchChange(element){
 function enableTwitter(clause){
   if (clause){
     //show twitter
-
   }
   else{
     //hide twitter
+    $class('nothidden')[0].className="sectionhidden";
   }
 }
 function loadIMG(event){
@@ -92,6 +92,7 @@ function $class(classes){
 }
 
 function initialize(){
+  //$id('TwitterContainer').style.display = hidden;
   getTweets("warcraft",5,"popular");
 }
 
