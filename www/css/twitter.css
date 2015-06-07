@@ -2,3 +2,10 @@
   display:none !important;
   visibility:hidden !important;
 }
+.nothidden {
+
+}
+nav {
+  color: #fff;
+  background-color: #ee6e73;
+}

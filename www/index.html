@@ -1,121 +1,148 @@
 <!DOCTYPE html>
-  <html>
-    <head>
-      <!--Import materialize.css-->
-      <link rel="stylesheet" href="css/twitter.css" />
-      <link rel="stylesheet" href="css/responsive-placeholder-images.css" />
-      <link rel="stylesheet" href="css/theme-dark/annotorious-dark.css" />
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-      <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-      <script src="js/responsive-placeholder-images.js"></script>
-      <script src="js/annotorious.min.js"></script>
-      <script src="js/ulti.js"></script>
-    </head>
-    <body onload="initialize()">
-      <div id="tweetHolder" style="display: none;">
-      </div>
-      <nav>
-        <div class="nav-wrapper blue lighten-2">
-          <a href="#" class="brand-logo center">ImgNotate</a>
+<html>
+
+<head>
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="css/twitter.css" />
+    <link rel="stylesheet" href="css/responsive-placeholder-images.css" />
+    <link rel="stylesheet" href="css/theme-dark/annotorious-dark.css" />
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/responsive-placeholder-images.js"></script>
+    <script src="js/annotorious.min.js"></script>
+    <script src="js/ulti.js"></script>
+</head>
+
+<body onload="initialize()">
+    <div id="tweetHolder" style="display: none;"></div>
+    <nav>
+        <div class="nav-wrapper blue darken-2" >
+          <img style="margin-top:15px;" height="30" width="150" src="image/lockerdome.png" class="brand-logo left"></img>
+          <a class="brand-logo center">Add Image with Annotations</a>
+   <ul id="nav-mobile" class="right hide-on-med-and-down">
+     <li><a href="content.html" >Publish</a></li>
+   </ul>
         </div>
-      </nav>
+    </nav>
+    <div class="container">
+      <br>
+        <div class="row">
+            <div class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                      <i class="prefix"><img src="image/ic_subject_black_48dp_2x.png" height="36" width="36"></i>
+                        <input id="title" type="text">
+                        <label for="text">Title</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                      <i class="prefix"><img src="image/ic_link_black_48dp_2x.png" height="36" width="36"></i>
+                        <input id="link" type="text">
+                        <label for="text">Article Link</label>
+                    </div>
+                </div>
 
-      <div class="container">
+                <!-- Picture Input-->
+                <div class="row">
+                    <div class="input-field col s12" onkeyup="loadIMG(event)">
+                      <i class="prefix"><img src="image/ic_insert_photo_black_48dp_2x.png" height="36" width="36"></i>
+                        <input id="imglinkField" type="text">
+                        <label for="text">Image Link</label>
+                    </div>
+                </div>
 
-      <div class="row">
-        <div class="input-field col s12" onkeyup="loadIMG(event)">
-          <input id="imglinkField" type="text">
-          <label for="text">Image Link</label>
-        </div>
-      </div>
 
-      <div class="row" style="margin: 20px;">
-        <div class="col s10 offset-s1 ">
-              <div  id="upload">
-                <img id="annot" draggable="false" class="annotatable" src="http://www.engraversnetwork.com/files/placeholder.jpg" style="width:100%"/>
+
+                <!-- Picture -->
+                <div class="row" style="margin: 20px;">
+                    <div class="col s10 offset-s1">
+                        <div id="upload">
+                            <img id="annot" draggable="false" class="annotatable" src="http://www.engraversnetwork.com/files/placeholder.jpg" style="width:100%" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                  <div class="col s4">
+                <h5>Enable Twitter Radar</h5>
+
+                </div>
+                <div class="col s4">
+                <!-- Switch -->
+                <div class="switch center-align" style="margin-top: 15px;" >
+                    <label>
+                        Off
+
+                        <input type="checkbox" onchange="switchChange(this)">
+                        <span class="lever"></span> On
+
+                    </label>
+                </div>
+              </div>
+              <div class="col s4 right-align">
+                <a class="waves-effect waves-light btn green darken-2" style="margin-top: 7px;" onclick="GetTweets()">
+                  <i class="mdi-content-send right"></i>Get Tweets</a>
+
             </div>
-          </div>
-      </div>
-<h3>Enable Twitter Radar</h3>
-      <!-- Switch -->
-  <div class="switch">
-    <label>
-      Off
-      <input type="checkbox" onchange="switchChange(this)">
-      <span class="lever"></span>
-      On
-    </label>
-  </div>
+              </div>
 
-  <section class="sectionhidden">
-  <div class="row">
+                <!-- twitter list -->
+                <section class="sectionhidden">
 
-      <div class="row">
-        <div class="input-field col s3">
-          <input id="last_name" type="text" class="active">
-          <label for="last_name">Hashtags</label>
+                    <div class="row" style="margin-top:20px;">
+
+                        <div class="input-field col s8">
+                            <input placeholder="Enter a #Hashtag" id="hashtag" type="text" class="invalidate">
+                            <label style="font-size: 17px;color:#262626;" for="hastag">#Hashtag</label>
+
+
+                            <!-- slider-->
+                            <span style="font-size: 17px;">Number of Tweets</span>
+                            <form action="#">
+                                <p class="range-field">
+                                    <input type="range" id="num_tweets" min="1" max="10" />
+                                </p>
+                            </form>
+
+                        </div>
+                        <div class="input-field col s4 ">
+                        <form action="#">
+                          <p>
+                            <input class="with-gap" name="group1" type="radio" id="radio1" value="popular" />
+                            <label for="radio1">Most Popular</label>
+                          </p>
+                          <p>
+                            <input class="with-gap" name="group1" type="radio" id="radio2" value="recent" />
+                            <label for="radio2">Most Recent</label>
+                          </p>
+                        </form>
+                      </div>
+                    </div>
+                    <div id="tweets-list"></div>
+
+
+                </section>
+
+            </div>
+
+
+
         </div>
 
-        <!-- slider-->
-        <h5>Number of Tweets</h5>
-        <p class="range-field col s3">
-          <input type="range" id="test5" min="0" max="10" />
-        </p>
-      </div>
+    </div>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript">
+        jQuery.noConflict();
 
-  </div>
+        jQuery(document).ready(function($) {
+            // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+            $('.modal-trigger').leanModal();
+        });
+    </script>
+</body>
 
-
-      <div id="tweets-list">
-
-
-      <div id="tweets-list">
-      </div>
-
-    </section>
-
-
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="title" type="text">
-          <label for="text">Title</label>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="link" type="text">
-          <label for="text">Link</label>
-        </div>
-      </div>
-
-       <div class="row">
-         <div class="col s12 center-align">
-       <a href="content.html"><button class="btn waves-effect waves-light" type="submit" name="action">Submit
-         <i class="mdi-content-send right"></i>
-       </button></a>
-     </div>
-     </div>
-
-  </div>
-
-      <!--Import jQuery before materialize.js-->
-      <script type="text/javascript" src="js/materialize.min.js"></script>
-
-      <script type="text/javascript">
-      jQuery.noConflict();
-
-      jQuery(document).ready(function($){
-        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-      $('.modal-trigger').leanModal();
-});
-
-
-
-
-      </script>
-
-    </body>
-  </html>
+</html>
