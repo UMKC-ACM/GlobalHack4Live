@@ -12,7 +12,8 @@
       <script src="js/responsive-placeholder-images.js"></script>
       <script src="js/annotorious.min.js"></script>
       <script src="js/ulti.js"></script>
-    </head>
+
+  </head>
     <body onload="initialize()">
       <div id="tweetHolder" style="display: none;">
       </div>
@@ -34,7 +35,7 @@
       <div class="row" style="margin: 20px;">
         <div class="col s10 offset-s1 ">
               <div  id="upload">
-                <img id="annot" draggable="false" class="annotatable" src="http://www.engraversnetwork.com/files/placeholder.jpg" style="width:100%"/>
+                <img id="annot" class="annotatable" src="" style="width:100%"/>
             </div>
           </div>
       </div>
@@ -49,7 +50,6 @@
     </label>
   </div>
 
-  <section class="sectionhidden">
   <div class="row">
 
       <div class="row">
@@ -65,19 +65,12 @@
         </p>
       </div>
 
-  </div>
-
-
-      <div id="tweets-list">
-
+   </div>
 
       <div id="tweets-list">
       </div>
 
-    </section>
-
-
-      <div class="row">
+     <div class="row">
         <div class="input-field col s12">
           <input id="title" type="text">
           <label for="text">Title</label>
@@ -93,9 +86,10 @@
 
        <div class="row">
          <div class="col s12 center-align">
-       <a href="content.html"><button class="btn waves-effect waves-light" type="submit" name="action">Submit
+
+         <button class="btn waves-effect waves-light" type="submit" id="submit" name="action">Submit
          <i class="mdi-content-send right"></i>
-       </button></a>
+       </button>
      </div>
      </div>
 
@@ -105,15 +99,78 @@
       <script type="text/javascript" src="js/materialize.min.js"></script>
 
       <script type="text/javascript">
+
       jQuery.noConflict();
 
       jQuery(document).ready(function($){
+
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
       $('.modal-trigger').leanModal();
 });
+      //$("#upload").html('<img id="annot" class="annotatable" src="image/640px-Hallstatt.jpg" style="width:100%"/>');
+
+
+      $("#upload").html('<img id="annot" class="annotatable" src="http://kdmedia.kanald.ro/kfetele/image/201406/w650/media_140376880269804600.jpg" style="width:100%"/>');
+
+      $("#replace").click(function(){
+
+        })
+
+        $("#submit").click(function(){
+
+          var myAnnotation = anno.getAnnotations();
+
+          var title = $("#title").val();
+          var link = $("#link").val();
+
+          alert(title);
+          alert(link);
+
+          var content_id = 0;
+
+            var obj= { }
+
+            obj.title = title
+            obj.link = link
+            obj.annotation = myAnnotation
+
+            for( i = 0; i < myAnnotation.length ; i++){
+                myAnnotation[i].editable = false;
+              }
+
+              function xyz(){
+                ;
+              }
+            function postData(obj) {
+              $.ajax({
+                  url: "http://rootastic.us.to/1.0.0/content_id/",
+                  method: 'POST',
+                  data: obj,
+                  //headers: {'Accept': "text/json" ,'Content-Type': "text/json"}
+                })  .done(function(result) {
+                    console.log(JSON.stringify(obj))
+                        console.log("success send")
+                      })//end of .done
+                      .fail(function() {
+                          console.log( "error" );
+                        });//end of .fail
+                }//end of PostData
+
+           $.get( "http://104.236.78.214:8080/")
+                  .done(function(result) {
+                      content_id  = JSON.parse(result)
+                      obj.id = content_id.id.toString();
+                      console.log(JSON.stringify(obj));
+                      postData(obj)
+                      console.log("success fetch")
+
+                    });
 
 
 
+          })//end of submit
+
+    });//end of jQuery
 
       </script>
 

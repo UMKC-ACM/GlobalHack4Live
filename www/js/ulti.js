@@ -24,7 +24,6 @@ function switchChange(element){
 function enableTwitter(clause){
   if (clause){
     //show twitter
-    $class('sectionhidden')[0].className="nothidden";
   }
   else{
     //hide twitter
