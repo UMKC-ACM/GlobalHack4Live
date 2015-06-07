@@ -134,23 +134,32 @@
                 myAnnotation[i].editable = false;
               }
 
-              function xyz(){
-                ;
-              }
+
+            jQuery.ajaxSetup({ jsonp: null, jsonpCallback: null});
+
             function postData(obj) {
-              $.ajax({
-                  url: "http://rootastic.us.to/1.0.0/content_id/",
+                $.ajax({
+                  url: "http://stormy-plains-1882.herokuapp.com/1.0.0/content_id/",
                   method: "POST",
                   data: obj,
-                  dataType: "json",
-                  headers: {'Accept': "text/json" ,'Content-Type': "text/json"}
-                })  .done(function(result) {
+                  headers:  { Accept : "text/json",  "Content-Type": "text/json" }
+                }) .done(function(result) {
                     console.log(JSON.stringify(obj))
                         console.log("success send")
                       })//end of .done
                       .fail(function() {
                           console.log( "error" );
-                        });//end of .fail
+                        });//end of .fail */
+
+        /*$.post( "104.236.78.214/1.0.0/content_id/",function(){alert("succes")},"json")
+                      .done(function(result) {
+                          console.log(JSON.stringify(obj))
+                          console.log("success send")
+                        })//end of .done
+                        .fail(function() {
+                            console.log( "error" );
+                          });//end of .fail*/
+
                 }//end of PostData
 
            $.get( "http://104.236.78.214:8080/")
