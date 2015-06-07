@@ -16,7 +16,8 @@
 
   </head>
     <body onload="initialize()">
-
+      <div id="tweetHolder" style="display: none;">
+      </div>
       <nav>
         <div class="nav-wrapper blue lighten-2">
           <a href="#" class="brand-logo center">ImgNotate</a>
@@ -24,7 +25,14 @@
       </nav>
 
       <div class="container">
-
+      <form id   =  "uploadForm"
+       enctype   =  "multipart/form-data"
+       action    =  "http://104.236.78.214:5001/api/photo"
+       method    =  "post"
+      >
+        <input type="file" name="userPhoto" />
+        <input type="submit" value="Upload Image" name="submit">
+      </form>
       <div class="row" style="margin: 20px;">
         <div class="col s10 offset-s1 ">
               <div  id="upload">
@@ -37,8 +45,6 @@
             </div>
           </div>
           <a href="content.html">nextpage</a>
-
-
 
       <div id="tweets-list">
       </div>
@@ -86,13 +92,8 @@
 
           var myAnnotation = anno.getAnnotations();
 
-          console.log(JSON.stringify(myAnnotation));
-
           var title = $("#title").val();
           var link = $("#link").val();
-
-          alert(title);
-          alert(link);
 
           var content_id = 0;
 
@@ -102,12 +103,18 @@
             obj.link = link
             obj.annotation = myAnnotation
 
-            function postData(obj) {
-                 $.get( "http://rootastic.us.to/1.0.0/content_id/"+obj.id)
+            for( i = 0; i < myAnnotation.length ; i++){
+                myAnnotation[i].editable = false;
+              }
+
+          console.log(JSON.stringify(myAnnotation));
+
+          function postData(obj) {
+                 $.get( "http://rotastic.us.to/1.0.0/content_id/"+obj.id)
                       .done(function(result) {
-                            console.log(result);
                             });
                 }
+
 
             $.get( "http://104.236.78.214:8080/")
                   .done(function(result) {
@@ -116,7 +123,6 @@
                       console.log(obj);
                       postData(obj)
                         });
-
 
           })//end of submit
 

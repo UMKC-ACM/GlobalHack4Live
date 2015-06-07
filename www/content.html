@@ -12,8 +12,28 @@
       <script src="js/responsive-placeholder-images.js"></script>
       <script type="text/javascript" src="js/annotorious.min.js"></script>
 
+      <script type="text/javascript">
+
+              var annot = [{
+              "src":"http://127.0.0.1:8080/image/640px-Hallstatt.jpg",
+              "text":"hey",
+              "shapes":[{
+                    "type":"rect",
+                    "geometry":{
+                          "x":0.44935543278084716,
+                          "y":0.3352941176470588,
+                          "width":0.055248618784530384,
+                          "height":0.08235294117647059
+                            }
+                      }],
+              "context":"http://127.0.0.1:8080/",
+              "editable": false
+            }];
+
+      </script>
+
     </head>
-    <body>
+    <body onload="anno.addAnnotation(annot[0])">
 
       <nav>
         <div class="nav-wrapper blue lighten-2">
@@ -27,7 +47,7 @@
             <div class="col s12">
               <div class="card ">
                 <div class="card-image">
-                  <img src="image/640px-Hallstatt.jpg">
+                  <img  class="annotatable" draggable="false" src="image/640px-Hallstatt.jpg">
                 </div>
                 <div class="row">
                   <div class="col">
@@ -50,10 +70,5 @@
 
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="js/materialize.min.js"></script>
-
-      <script type="text/javascript">
-
-      </script>
-
     </body>
   </html>
