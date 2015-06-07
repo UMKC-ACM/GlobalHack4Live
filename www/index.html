@@ -127,9 +127,6 @@
           var title = $("#title").val();
           var link = $("#link").val();
 
-          alert(title);
-          alert(link);
-
           var content_id = 0;
 
             var obj= { }
@@ -148,9 +145,10 @@
             function postData(obj) {
               $.ajax({
                   url: "http://rootastic.us.to/1.0.0/content_id/",
-                  method: 'POST',
+                  method: "POST",
                   data: obj,
-                  //headers: {'Accept': "text/json" ,'Content-Type': "text/json"}
+                  dataType: "json",
+                  headers: {'Accept': "text/json" ,'Content-Type': "text/json"}
                 })  .done(function(result) {
                     console.log(JSON.stringify(obj))
                         console.log("success send")
