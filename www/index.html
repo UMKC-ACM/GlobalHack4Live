@@ -1,32 +1,115 @@
 <!DOCTYPE html>
-<html ng-app="roos">
+  <html>
     <head>
-        <title>test</title>
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <link rel="stylesheet" href="css/responsive-placeholder-images.css" />
+      <link type="text/css" rel="stylesheet" href="css/annotorious.css" />
 
-        <meta charset="utf-8" />
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <!--STYLES -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+      <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script src="js/responsive-placeholder-images.js"></script>
+      <script type="text/javascript" src="js/annotorious.min.js"></script>
 
-        <!-- JS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     </head>
+    <body>
 
-    <body class="container-fluid">
-        <div class="row">
-            <span class="col text-center">hello</span>
+      <nav>
+        <div class="nav-wrapper blue lighten-2">
+          <a href="#" class="brand-logo center">Add Image with Annotations</a>
         </div>
-        <div class="row" ng-controller="mainCtrl">
-            <span class="col text-center">{{thus}}</span>
+      </nav>
+
+      <div class="container">
+
+      <div class="row" style="margin: 20px;">
+        <div class="col s10 offset-s1 ">
+              <div  id="upload">
+                  <div class="defer-image image-ratio:2x1" style="width:100%;">
+                    <div class="row">
+                      <div class="col s12">
+                        <a>
+                          <p class="center-align" style="font-size:1.5em;" id="replace" >click to upload image</p>
+                      </a>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="title" type="text">
+          <label for="text">Title</label>
         </div>
-        
-        <script src="js/app.js"></script>
-        <script src="js/ctrl.js"></script>
+      </div>
+
+      <div class="row">
+         <form class="col s12">
+           <div class="row">
+             <div class="input-field col s12">
+               <textarea id="textarea1" class="materialize-textarea"></textarea>
+               <label for="textarea1">Body</label>
+             </div>
+           </div>
+         </form>
+       </div>
+
+       <div class="row">
+         <div class="col s12 center-align">
+       <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+         <i class="mdi-content-send right"></i>
+       </button>
+     </div>
+     </div>
+
+  </div>
+
+  <!-- MODAL -->
+<!--  <div class="container">
+  <div class="row">
+    <div class="col s8">
+  <div id="modal1" class="modal"  style="width:70%">
+          <div class="modal-content">
+            <h4>Modal Header</h4>
+            <div class="row">
+              <div class="col s8 offset-s2">
+            <img class="annotatable" id="annot" draggable="false" src="image/iphone6s.jpeg" style="width:100%"/>
+          </div>
+        </div>
+        </div>
+          <div class="modal-footer">
+            <a href="#!" id="replace" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+          </div>
+        </div>
+        </div>
+    </div>
+</div>-->
+
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+
+      <script type="text/javascript">
+      jQuery.noConflict();
+
+      jQuery(document).ready(function($){
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+      $('.modal-trigger').leanModal();
+      $("#upload").html('<img id="annot" class="annotatable" src="image/iphone6s.jpeg" style="width:100%"/>');
+
+      $("#replace").click(function(){
+
+
+        });
+    });
+
+
+
+
+
+      </script>
+
     </body>
-</html>
+  </html>
