@@ -28,7 +28,6 @@
                   <div class="defer-image image-ratio:2x1" style="width:100%;">
                     <div class="row">
                           <p class="center-align" style="font-size:1.5em;" id="replace" >click to upload image</p>
-                      </a>
                       </div>
                     </div>
                   </div>
@@ -89,6 +88,7 @@
       jQuery(document).ready(function($){
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
       $('.modal-trigger').leanModal();
+
       $("#upload").html('<img id="annot" class="annotatable" src="image/640px-Hallstatt.jpg" style="width:100%"/>');
 
       $("#replace").click(function(){
