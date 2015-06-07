@@ -37,8 +37,8 @@ get = mkIdHandler (jsonO) $ handle
               Nothing -> return badContentID
               Just a -> return a
 
-create = mkInputHandler (jsonI . jsonO) $ handle 
-          where 	handle c@(ContentID id picture pairs) =  (liftIO $ createContent c) >> return (id)
+create = mkInputHandler (jsonI) $ handle 
+          where handle c@(ContentID id picture pairs) =  (liftIO $ createContent c) >> return ()
               
 apiRoutes = root -/ (route contentIDResource)
 
