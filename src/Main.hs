@@ -27,7 +27,7 @@ contentIDResource = mkResourceReader {
 testContentId = ContentID{ _id = "test",_picture = "",_pairs = [Pair {_x =10,_y=10,_info="test"}, Pair{_x=20,_y=20,_info="testy"}]}
 
 badContentID::ContentID
-badContentID = ContentID { _id = "ERROR NOT FOUND"}
+badContentID = ContentID { _id = "ERROR NOT FOUND", _picture ="", _pairs=[]}
 
 get = mkIdHandler (jsonO) $ handle 
      where handle _ id = do
@@ -40,9 +40,7 @@ get = mkIdHandler (jsonO) $ handle
 readPostFromDb id = return testContentId 
 
 create = mkInputHandler (jsonI . jsonO) $ handle 
-          where handle c = do
-                            key <- liftIO $ createContent c
-                            return (_id c)
+          where handle c =  (liftIO $ createContent c) >> return (_id c)
               
 apiRoutes = root -/ (route contentIDResource)
 api = [(mkVersion 1 0 0, Some1 apiRoutes)]
