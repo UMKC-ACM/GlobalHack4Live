@@ -1,7 +1,7 @@
 
 
   var annot = [{
-  "src":"http://127.0.0.1:8080/image/640px-Hallstatt.jpg",
+  "src":"http://kdmedia.kanald.ro/kfetele/image/201406/w650/media_140376880269804600.jpg",
   "text":"hey",
   "shapes":[{
         "type":"rect",

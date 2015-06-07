@@ -78,11 +78,12 @@
       <script type="text/javascript" src="js/materialize.min.js"></script>
 
       <script type="text/javascript">
+
       jQuery.noConflict();
 
       jQuery(document).ready(function($){
 
-      $("#upload").html('<img id="annot" class="annotatable" src="image/640px-Hallstatt.jpg" style="width:100%"/>');
+      $("#upload").html('<img id="annot" class="annotatable" src="http://kdmedia.kanald.ro/kfetele/image/201406/w650/media_140376880269804600.jpg" style="width:100%"/>');
 
       $("#replace").click(function(){
 
@@ -107,11 +108,12 @@
                 myAnnotation[i].editable = false;
               }
 
-          console.log(JSON.stringify(myAnnotation));
+            console.log(JSON.stringify(myAnnotation));
 
-          function postData(obj) {
-                 $.get( "http://rotastic.us.to/1.0.0/content_id/"+obj.id)
+            function postData(obj) {
+                 $.post( "http://rotastic.us.to/1.0.0/content_id/"+obj.id , obj)
                       .done(function(result) {
+                            alert("success send");
                             });
                 }
 
@@ -120,9 +122,11 @@
                   .done(function(result) {
                       content_id  = JSON.parse(result)
                       obj.id = content_id.id
-                      console.log(obj);
+                      console.log(JSON.stringify(obj));
                       postData(obj)
-                        });
+                      alert("success fetch")
+
+                      });
 
           })//end of submit
 
