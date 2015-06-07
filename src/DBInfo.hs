@@ -20,26 +20,47 @@ import Control.Monad.Logger
 conf = "host=ec2-54-83-57-86.compute-1.amazonaws.com port=5432 user=bmfwimcvljiyil dbname=d2fhi8h00c05m7 password=f4oDRsvVF5d4VFgm2vvEZ-fzd0"
 share [mkPersist sqlSettings, mkMigrate "migrateAll"][persistLowerCase|
 DBContentID 
-  dbid  T.Text
-  dbpicture  T.Text
-  dbpairs  [DBPair]
+  dtitle  T.Text
+  dlink  T.Text
+  dbannotation  [DBAnnotation]
+  dbid T.Text
   deriving Show
-DBPair
-  dbx Int
-  dby Int
-  dbinfo T.Text
+DBAnnotation
+  dbsrc T.Text
+  dbtext T.Text
+  dbshapes [DBShapes]
+  dbcontext T.Text
+  dbeditable Bool
+  deriving Show
+DBShapes
+  dbtype T.Text
+  dbgeometry DBGeometry
+  deriving Show
+DBGeometry
+  dbx Double
+  dby Double
+  dbwidth Double
+  dbheight Double
   deriving Show
 |]
 
-test = undefined
 
-contentToDB (ContentID id picture pairs) = DBContentID id picture (map pairToDB pairs)
 
-pairToDB (Pair x y info) = DBPair x y info
+contentToDB (ContentID link title annotation id) = DBContentID link title (map annotationToDB annotation) id
 
-dBToContent (DBContentID id picture pairs) = ContentID id picture (map dBToPair pairs)
+annotationToDB (Annotation src text shapes context editable) = DBAnnotation src text (map shapeToDB shapes) context editable
 
-dBToPair (DBPair x y info) = Pair x y info
+shapeToDB (Shapes typ geom) = DBShapes typ (geometryToDB geom)
+
+geometryToDB (Geometry x y w h) = DBGeometry x y w h
+
+dBToContent (DBContentID title link annotation id) = ContentID title link (map dBToAnnotation annotation) id
+
+dBToAnnotation (DBAnnotation src text shapes context editable) = Annotation src text (map dBToShape shapes) context editable
+
+dBToShape (DBShapes typ geom) = Shapes typ (dBToGeometry geom)
+
+dBToGeometry (DBGeometry x y w h ) = Geometry x y w h
 
 mkMigration = runStdoutLoggingT $ withPostgresqlPool conf 1 $ \pool ->
      liftIO $ flip runSqlPersistMPool pool $  runMigration migrateAll

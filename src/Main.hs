@@ -25,10 +25,34 @@ contentIDResource = mkResourceReader {
  R.create = Just create
 }
 
-testContentId = ContentID{ _id = "test",_picture = "",_pairs = [Pair {_x =10,_y=10,_info="test"}, Pair{_x=20,_y=20,_info="testy"}]}
+testContentId = ContentID{_title="yest",
+                          _link="eh",
+                          _annotation = [testAnnotation],
+                          _id = "test"
+}
+
+testAnnotation = Annotation {_src = "http://127.0.0.1:8080/image/640px-Hallstatt.jpg",
+                             _text = "test",
+   _context = "http://127.0.0.1:8080/",
+   _editable = False,
+                          _shapes = [testShape]
+}
+
+testShape = Shapes {
+  _type = "rect",
+  _geometry = testGeometry
+  }
+
+testGeometry = Geometry{
+  _x = 1,
+  _y = 1,
+  _width = 1,
+  _height = 1
+}
 
 badContentID::ContentID
-badContentID = ContentID { _id = "ERROR NOT FOUND", _picture ="", _pairs=[]}
+badContentID = ContentID { _title = errString, _link =errString, _annotation=[], _id = errString}
+        where errString = "ERROR: NOT FOUND"
 
 get = mkIdHandler (jsonO) $ handle 
      where handle _ id = do
@@ -38,7 +62,7 @@ get = mkIdHandler (jsonO) $ handle
               Just a -> return a
 
 create = mkInputHandler (jsonI) $ handle 
-          where handle c@(ContentID id picture pairs) =  (liftIO $ createContent c) >> return ()
+          where handle c =  (liftIO $ createContent c) >> return ()
               
 apiRoutes = root -/ (route contentIDResource)
 
