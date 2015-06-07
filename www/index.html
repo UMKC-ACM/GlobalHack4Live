@@ -12,7 +12,9 @@
       <script src="js/responsive-placeholder-images.js"></script>
       <script src="js/annotorious.min.js"></script>
       <script src="js/ulti.js"></script>
-    </head>
+      <script src="test.js"></script>
+
+  </head>
     <body onload="initialize()">
 
       <nav>
@@ -34,6 +36,9 @@
                   </div>
             </div>
           </div>
+          <a href="content.html">nextpage</a>
+
+
 
       <div id="tweets-list">
       </div>
@@ -54,34 +59,14 @@
 
        <div class="row">
          <div class="col s12 center-align">
-       <a href="content.html"><button class="btn waves-effect waves-light" type="submit" name="action">Submit
+
+         <button class="btn waves-effect waves-light" type="submit" id="submit" name="action">Submit
          <i class="mdi-content-send right"></i>
-       </button></a>
+       </button>
      </div>
      </div>
 
   </div>
-
-  <!-- MODAL -->
-<!--  <div class="container">
-  <div class="row">
-    <div class="col s8">
-  <div id="modal1" class="modal"  style="width:70%">
-          <div class="modal-content">
-            <h4>Modal Header</h4>
-            <div class="row">
-              <div class="col s8 offset-s2">
-            <img class="annotatable" id="annot" draggable="false" src="image/iphone6s.jpeg" style="width:100%"/>
-          </div>
-        </div>
-        </div>
-          <div class="modal-footer">
-            <a href="#!" id="replace" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-          </div>
-        </div>
-        </div>
-    </div>
-</div>-->
 
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="js/materialize.min.js"></script>
@@ -90,20 +75,52 @@
       jQuery.noConflict();
 
       jQuery(document).ready(function($){
-        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-      $('.modal-trigger').leanModal();
 
       $("#upload").html('<img id="annot" class="annotatable" src="image/640px-Hallstatt.jpg" style="width:100%"/>');
 
       $("#replace").click(function(){
 
+        })
 
-        });
-    });
+        $("#submit").click(function(){
+
+          var myAnnotation = anno.getAnnotations();
+
+          console.log(JSON.stringify(myAnnotation));
+
+          var title = $("#title").val();
+          var link = $("#link").val();
+
+          alert(title);
+          alert(link);
+
+          var content_id = 0;
+
+            var obj= { }
+
+            obj.title = title
+            obj.link = link
+            obj.annotation = myAnnotation
+
+            function postData(obj) {
+                 $.get( "http://rootastic.us.to/1.0.0/content_id/"+obj.id)
+                      .done(function(result) {
+                            console.log(result);
+                            });
+                }
+
+            $.get( "http://104.236.78.214:8080/")
+                  .done(function(result) {
+                      content_id  = JSON.parse(result)
+                      obj.id = content_id.id
+                      console.log(obj);
+                      postData(obj)
+                        });
 
 
+          })//end of submit
 
-
+    });//end of jQuery
 
       </script>
 
