@@ -22,6 +22,7 @@ function switchChange(element) {
 
 }
 
+
 function enableTwitter(clause) {
     if (clause) {
         //show twitter
@@ -30,6 +31,7 @@ function enableTwitter(clause) {
         //hide twitter
         $class('nothidden')[0].className = "sectionhidden";
     }
+
 }
 
 function loadIMG(event) {
@@ -133,6 +135,4 @@ function fill_view() {
             });
         }
     }
-    //html+="<a href='#!' class='collection-item'>";
-    //html+=tweets["statuses"][i]["text"];
-    //html+="</a>";
+  

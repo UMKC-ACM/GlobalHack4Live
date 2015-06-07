@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
@@ -18,28 +19,29 @@
 <body onload="initialize()">
     <div id="tweetHolder" style="display: none;"></div>
     <nav>
-        <div class="nav-wrapper blue darken-2" >
-          <img style="margin-top:15px;" height="30" width="150" src="image/lockerdome.png" class="brand-logo left"></img>
-          <a class="brand-logo center">Add Image with Annotations</a>
-   <ul id="nav-mobile" class="right hide-on-med-and-down">
-     <li><a href="content.html" >Publish</a></li>
-   </ul>
+        <div class="nav-wrapper blue darken-2">
+            <img style="margin-top:15px;" height="30" width="150" src="image/lockerdome.png" class="brand-logo left"></img>
+            <a class="brand-logo center">Add Image with Annotations</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="content.html">Publish</a>
+                </li>
+            </ul>
         </div>
     </nav>
     <div class="container">
-      <br>
+        <br>
         <div class="row">
             <div class="col s12">
                 <div class="row">
                     <div class="input-field col s12">
-                      <i class="prefix"><img src="image/ic_subject_black_48dp_2x.png" height="36" width="36"></i>
+                        <i class="prefix"><img src="image/ic_subject_black_48dp_2x.png" height="36" width="36"></i>
                         <input id="title" type="text">
                         <label for="text">Title</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <i class="prefix"><img src="image/ic_link_black_48dp_2x.png" height="36" width="36"></i>
+                        <i class="prefix"><img src="image/ic_link_black_48dp_2x.png" height="36" width="36"></i>
                         <input id="link" type="text">
                         <label for="text">Article Link</label>
                     </div>
@@ -48,7 +50,7 @@
                 <!-- Picture Input-->
                 <div class="row">
                     <div class="input-field col s12" onkeyup="loadIMG(event)">
-                      <i class="prefix"><img src="image/ic_insert_photo_black_48dp_2x.png" height="36" width="36"></i>
+                        <i class="prefix"><img src="image/ic_insert_photo_black_48dp_2x.png" height="36" width="36"></i>
                         <input id="imglinkField" type="text">
                         <label for="text">Image Link</label>
                     </div>
@@ -66,62 +68,67 @@
                 </div>
 
                 <div class="row">
-                  <div class="col s4">
-                <h5>Enable Twitter Radar</h5>
+                    <div class="col s4">
+                        <h5>Enable Twitter Radar</h5>
 
+                    </div>
+                    <div class="col s4">
+                        <!-- Switch -->
+                        <div class="switch center-align" style="margin-top: 15px;">
+                            <label>
+                                Off
+
+                                <input type="checkbox" onchange="switchChange(this)">
+                                <span class="lever"></span> On
+
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col s4 right-align">
+                        <a class="waves-effect waves-light btn green darken-2" style="margin-top: 7px;" onclick="GetTweets()">
+                            <i class="mdi-content-send right"></i>Get Tweets</a>
+
+
+                    </div>
                 </div>
-                <div class="col s4">
-                <!-- Switch -->
-                <div class="switch center-align" style="margin-top: 15px;" >
-                    <label>
-                        Off
 
-                        <input type="checkbox" onchange="switchChange(this)">
-                        <span class="lever"></span> On
+                <div class="container">
+                    <!-- twitter list -->
+                    <section class="sectionhidden">
 
-                    </label>
-                </div>
-              </div>
-              <div class="col s4 right-align">
-                <a class="waves-effect waves-light btn green darken-2" style="margin-top: 7px;" onclick="GetTweets()">
-                  <i class="mdi-content-send right"></i>Get Tweets</a>
+                        <div class="row" style="margin-top:20px;">
 
-            </div>
-              </div>
-
-                <!-- twitter list -->
-                <section class="sectionhidden">
-
-                    <div class="row" style="margin-top:20px;">
-
-                        <div class="input-field col s8">
-                            <input placeholder="Enter a #Hashtag" id="hashtag" type="text" class="invalidate">
-                            <label style="font-size: 17px;color:#262626;" for="hastag">#Hashtag</label>
+                            <div class="input-field col s8">
+                                <input placeholder="Enter a #Hashtag" id="hashtag" type="text" class="invalidate">
+                                <label style="font-size: 17px;color:#262626;" for="hastag">#Hashtag</label>
 
 
-                            <!-- slider-->
-                            <span style="font-size: 17px;">Number of Tweets</span>
+                                <!-- slider-->
+                                <span style="font-size: 17px;">Number of Tweets</span>
+                                <form action="#">
+                                    <p class="range-field">
+                                        <input type="range" id="num_tweets" min="1" max="10" />
+                                    </p>
+                                </form>
+
+                            </div>
+
+                        <div class="input-field col s4 ">
                             <form action="#">
-                                <p class="range-field">
-                                    <input type="range" id="num_tweets" min="1" max="10" />
+                                <p>
+                                    <input class="with-gap" name="group1" type="radio" id="radio1" value="popular" />
+                                    <label for="radio1">Most Popular</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group1" type="radio" id="radio2" value="recent" />
+                                    <label for="radio2">Most Recent</label>
                                 </p>
                             </form>
-
                         </div>
-                        <div class="input-field col s4 ">
-                        <form action="#">
-                          <p>
-                            <input class="with-gap" name="group1" type="radio" id="radio1" value="popular" />
-                            <label for="radio1">Most Popular</label>
-                          </p>
-                          <p>
-                            <input class="with-gap" name="group1" type="radio" id="radio2" value="recent" />
-                            <label for="radio2">Most Recent</label>
-                          </p>
-                        </form>
                       </div>
-                    </div>
-                    <div id="tweets-list"></div>
+                </div>
+                <div id="tweets-list"></div>
+
 
 
                 </section>
@@ -138,10 +145,82 @@
     <script type="text/javascript">
         jQuery.noConflict();
 
+
+
+
         jQuery(document).ready(function($) {
-            // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+
             $('.modal-trigger').leanModal();
-        });
+
+
+            $("#submit").click(function() {
+
+                    var myAnnotation = anno.getAnnotations();
+
+                    var title = $("#title").val();
+                    var link = $("#link").val();
+
+                    var content_id = 0;
+
+                    var obj = {}
+
+                    obj.title = title
+                    obj.link = link
+                    obj.annotation = myAnnotation
+
+                    for (i = 0; i < myAnnotation.length; i++) {
+                        myAnnotation[i].editable = false;
+                    }
+
+
+                    jQuery.ajaxSetup({
+                        jsonp: null,
+                        jsonpCallback: null
+                    });
+
+                    function postData(obj) {
+                            $.ajax({
+                                    url: "http://stormy-plains-1882.herokuapp.com/1.0.0/content_id/",
+                                    method: "POST",
+                                    data: obj,
+                                    headers: {
+                                        Accept: "text/json",
+                                        "Content-Type": "text/json"
+                                    }
+                                }).done(function(result) {
+                                    console.log(JSON.stringify(obj))
+                                    console.log("success send")
+                                }) //end of .done
+                                .fail(function() {
+                                    console.log("error");
+                                }); //end of .fail */
+
+                            /*$.post( "104.236.78.214/1.0.0/content_id/",function(){alert("succes")},"json")
+                                          .done(function(result) {
+                                              console.log(JSON.stringify(obj))
+                                              console.log("success send")
+                                            })//end of .done
+                                            .fail(function() {
+                                                console.log( "error" );
+                                              });//end of .fail*/
+
+                        } //end of PostData
+
+                    $.get("http://104.236.78.214:8080/")
+                        .done(function(result) {
+                            content_id = JSON.parse(result)
+                            obj.id = content_id.id.toString();
+                            console.log(JSON.stringify(obj));
+                            postData(obj)
+                            console.log("success fetch")
+
+                        });
+
+
+
+                }) //end of submit
+
+        }); //end of jQuery
     </script>
 </body>
 

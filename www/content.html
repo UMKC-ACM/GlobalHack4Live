@@ -8,19 +8,57 @@
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-      <script src='http://globalhack4.test.lockerdome.com/gh_app_platform.js'></script>
       <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script src="js/responsive-placeholder-images.js"></script>
       <script type="text/javascript" src="js/annotorious.min.js"></script>
 
+      <script type="text/javascript">
+
+              var annot = [{
+              "src":"http://127.0.0.1:8080/image/640px-Hallstatt.jpg",
+              "text":"hey",
+              "shapes":[{
+                    "type":"rect",
+                    "geometry":{
+                          "x":0.44935543278084716,
+                          "y":0.3352941176470588,
+                          "width":0.055248618784530384,
+                          "height":0.08235294117647059
+                            }
+                      }],
+              "context":"http://127.0.0.1:8080/",
+              "editable": false
+            },
+            {
+            "src":"http://127.0.0.1:8080/image/640px-Hallstatt.jpg",
+            "text":"hey",
+            "shapes":[{
+                  "type":"rect",
+                  "geometry":{
+                        "x":0.54935543278084716,
+                        "y":0.1352941176470588,
+                        "width":0.055248618784530384,
+                        "height":0.08235294117647059
+                          }
+                    }],
+            "context":"http://127.0.0.1:8080/",
+            "editable": false
+          }];
+
+            function loadAnnotations(obj){
+              for(i = 0; i < obj.length ; i++){
+                anno.addAnnotation(obj[i]);
+              }
+            }
+
+      </script>
+
     </head>
-    <body>
+    <body onload="loadAnnotations(annot)">
 
-
-
-              <div class="card " style="margin:0 0 0 0;">
+              <div class="card large">
                 <div class="card-image">
-                  <img src="image/640px-Hallstatt.jpg">
+                  <img  class="annotatable" draggable="false" src="image/640px-Hallstatt.jpg">
                 </div>
                 <div class="row">
                   <div class="col">
@@ -28,22 +66,17 @@
                   </div>
                 </div>
 
-
                     <blockquote class="grey-text text-darken-4 " style="position: relative; left: 13px;" >
                       This is an example of where a link would go
                     </blockquote>
-
 
                 </div>
 
 
 
+
+
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="js/materialize.min.js"></script>
-
-      <script type="text/javascript">
-
-      </script>
-
     </body>
   </html>
