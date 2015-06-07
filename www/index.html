@@ -25,29 +25,55 @@
       </nav>
 
       <div class="container">
-      <form id   =  "uploadForm"
-       enctype   =  "multipart/form-data"
-       action    =  "http://104.236.78.214:5001/api/photo"
-       method    =  "post"
-      >
-        <input type="file" name="userPhoto" />
-        <input type="submit" value="Upload Image" name="submit">
-      </form>
+
+      <div class="row">
+        <div class="input-field col s12" onkeyup="loadIMG(event)">
+          <input id="imglinkField" type="text">
+          <label for="text">Image Link</label>
+        </div>
+      </div>
+
       <div class="row" style="margin: 20px;">
         <div class="col s10 offset-s1 ">
               <div  id="upload">
-                  <div class="defer-image image-ratio:2x1" style="width:100%;">
-                    <div class="row">
-                          <p class="center-align" style="font-size:1.5em;" id="replace" >click to upload image</p>
-                      </div>
-                    </div>
-                  </div>
+
+                <img id="annot" class="annotatable" src="" style="width:100%"/>
             </div>
           </div>
-          <a href="content.html">nextpage</a>
+      </div>
+<h3>Enable Twitter Radar</h3>
+      <!-- Switch -->
+  <div class="switch">
+    <label>
+      Off
+      <input type="checkbox" onchange="switchChange(this)">
+      <span class="lever"></span>
+      On
+    </label>
+  </div>
+
+  <section id="TwitterContainer">
+  <div class="row">
+
+      <div class="row">
+        <div class="input-field col s3">
+          <input id="last_name" type="text" class="active">
+          <label for="last_name">Hashtags</label>
+        </div>
+
+        <!-- slider-->
+        <h5>Number of Tweets</h5>
+        <p class="range-field col s3">
+          <input type="range" id="test5" min="0" max="10" />
+        </p>
+      </div>
+
+    </div>
 
       <div id="tweets-list">
       </div>
+
+    </section>
 
       <div class="row">
         <div class="input-field col s12">
@@ -83,6 +109,11 @@
 
       jQuery(document).ready(function($){
 
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+      $('.modal-trigger').leanModal();
+      //$("#upload").html('<img id="annot" class="annotatable" src="image/640px-Hallstatt.jpg" style="width:100%"/>');
+
+
       $("#upload").html('<img id="annot" class="annotatable" src="http://kdmedia.kanald.ro/kfetele/image/201406/w650/media_140376880269804600.jpg" style="width:100%"/>');
 
       $("#replace").click(function(){
@@ -95,6 +126,9 @@
 
           var title = $("#title").val();
           var link = $("#link").val();
+          
+          alert(title);
+          alert(link);
 
           var content_id = 0;
 
@@ -114,9 +148,8 @@
                  $.post( "http://rotastic.us.to/1.0.0/content_id/"+obj.id , obj)
                       .done(function(result) {
                             alert("success send");
-                            });
-                }
-
+                          });//end of .done
+                }//end of PostData
 
             $.get( "http://104.236.78.214:8080/")
                   .done(function(result) {
@@ -126,7 +159,7 @@
                       postData(obj)
                       alert("success fetch")
 
-                      });
+                    });//end of .done
 
           })//end of submit
 

@@ -15,7 +15,27 @@ window.twttr = (function(d, s, id) {
   return t;
 }(document, "script", "twitter-wjs"));
 
+function switchChange(element){
+  console.log(element.checked);
+  var current = element.checked
+  enableTwitter(current);
 
+}
+function enableTwitter(clause){
+  if (clause){
+    //show twitter
+
+  }
+  else{
+    //hide twitter
+  }
+}
+function loadIMG(event){
+  if (event.keyCode == 13 ){
+  var link = $id('imglinkField').value;
+  $id('annot').src = link;
+  }
+}
 function createTweetfromID(position,id,callback){
   var html;
   jQuery.ajax({
@@ -72,8 +92,10 @@ function $class(classes){
 }
 
 function initialize(){
+  $id('TwitterContainer').style.display = none;
   getTweets("warcraft",5,"popular");
 }
+
 function getTweets(tag,count,type){
     var url = "http://104.236.78.214:5001/api/getTweets?tag="+tag+"&count="+count+"&type="+type;
     jQuery.get(url, function(data, status){
@@ -83,17 +105,23 @@ function getTweets(tag,count,type){
 
     });
 }
+function fillTextArea(element){
+  $class('annotorious-editor-text goog-textarea')[0].value = element.nextSibling.innerHTML;
+}
+
 function fill_view(){
     var tempHTML;
     var list = $id("tweets-list");
     list.innerHTML = "";
 
+
+
     console.log(tweets);
     //construct structure
     tempHTML+="<div class='collection'>";
     for(var i=0;i<tweets["statuses"].length;i++){
-      tempHTML+="<a href='#!' class='waves-effect waves-teal btn-flat' style='float:right;'>GET LINK</a>";
-      tempHTML+="<a href='#!' class='collection-item'></a>";
+      tempHTML+="<a href='#!' class='waves-effect waves-teal btn-flat' onclick='fillTextArea(this)' style='float:right;top:50px'>GET LINK</a>";
+      tempHTML+="<div class='collection-item' style='display: block; -webkit-transition: 0.25s;-moz-transition: 0.25s;-o-transition: 0.25s;-ms-transition: 0.25s;transition: 0.25s;color: #26a69a;'></div>";
     }
     tempHTML+="</div>";
     list.innerHTML = tempHTML;
